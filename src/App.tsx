@@ -1,24 +1,18 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
+import "./App.css";
+import RealTimeWrapper from "./components/RealTimeWrapper";
+import UserInputWrapper from "./components/UserInputWrapper";
+
+// frontend env?
 
 function App() {
+  const [realTimeData, setRealTimeData] = useState(null);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="flex flex-col w-full h-screen py-5 items-center justify-center text-slate-200">
+      <div className="p-1 rounded bg-slate-600 shadow-lg">
+        <UserInputWrapper setRealTimeData={setRealTimeData} />
+        <RealTimeWrapper realTimeData={realTimeData} />
+      </div>
     </div>
   );
 }
