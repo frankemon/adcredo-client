@@ -13,6 +13,7 @@ export default function UserInputWrapper({ setRealTimeData }) {
   const [timeTableShowing, setTimeTableShowing] = useState(false);
   const [spinnerActive, setSpinnerActive] = useState(false);
   const [hasRealTimeData, setHasRealTimeData] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   // let site;
   async function handleLocationChange(e) {
     setSite(e.target.value);
@@ -31,12 +32,9 @@ export default function UserInputWrapper({ setRealTimeData }) {
     setShowSiteList(false);
   }
 
-  function isLoading() {
-    return spinnerActive ? "animate-spin" : "";
-  }
-
   async function handleSubmit(e) {
     e.preventDefault();
+    setIsLoading(true);
     const res = await fetch(`${baseUrl}/realtime/`, {
       method: "POST",
       body: JSON.stringify({
@@ -48,10 +46,9 @@ export default function UserInputWrapper({ setRealTimeData }) {
       },
     });
     const realTimeData = await res.json();
-    // setSpinnerActive(true);
     setRealTimeData(realTimeData);
     setTimeTableShowing(true);
-    // setSpinnerActive(false);
+    res.ok && setIsLoading(false);
   }
 
   if (!showSiteList && siteId) {
@@ -59,11 +56,9 @@ export default function UserInputWrapper({ setRealTimeData }) {
     inputField.value = stationName;
   }
 
-  // useEffect(() => {
-  //   if (!timeTableShowing && hasRealTimeData) {
-  //     setSpinnerActive(true);
-  //   }
-  // }, [spinnerActive]);
+  // if (isLoading) {
+  //   return <div>Loading...</div>;
+  // }
 
   return (
     <div
@@ -96,7 +91,7 @@ export default function UserInputWrapper({ setRealTimeData }) {
           text={"Hämta"}
           vehicleType={vehicleType.value}
           site={site}
-          spinnerActive={null}
+          isLoading={isLoading}
         />
       </form>
       <div className="absolute w-64 bg-slate-800">

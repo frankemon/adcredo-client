@@ -21,7 +21,14 @@ function RealTimeTable({ realTimeData }) {
           </div>
         </>
       )} */}
-      {realTimeData && (
+      {realTimeData?.length === 0 && (
+        <div className="w-full p-5 rounded-b bg-slate-800 select-none">
+          <div className="w-full text-center">
+            Vi hittade tyvärr inga resor just nu
+          </div>
+        </div>
+      )}
+      {realTimeData?.length > 0 && (
         <div className="w-full p-5 rounded-b bg-slate-800 select-none">
           <table className="w-full text-center">
             <thead>
