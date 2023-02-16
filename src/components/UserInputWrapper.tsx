@@ -15,6 +15,9 @@ export default function UserInputWrapper({ setRealTimeData }) {
   const [hasRealTimeData, setHasRealTimeData] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   // let site;
+
+  // try catch blocks
+
   async function handleLocationChange(e) {
     setSite(e.target.value);
     // site = e.target.value;
@@ -55,10 +58,6 @@ export default function UserInputWrapper({ setRealTimeData }) {
     const inputField = document.querySelector("input");
     inputField.value = stationName;
   }
-
-  // if (isLoading) {
-  //   return <div>Loading...</div>;
-  // }
 
   return (
     <div

@@ -14,13 +14,6 @@ function RealTimeTable({ realTimeData }) {
 
   return (
     <>
-      {/* {!realTimeData && (
-        <>
-          <div className="flex items-center p-2 text-cyan-400 font-semibold">
-            Hämtar...
-          </div>
-        </>
-      )} */}
       {realTimeData?.length === 0 && (
         <div className="w-full p-5 rounded-b bg-slate-800 select-none">
           <div className="w-full text-center">

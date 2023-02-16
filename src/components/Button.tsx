@@ -1,5 +1,3 @@
-import React from "react";
-
 function Button({ type, text, vehicleType, site, isLoading }) {
   function renderSpinner() {
     return (
