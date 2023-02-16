@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import VehicleDropdown from "./VehicleDropdown";
 import Button from "./Button";
+import { GoLocation } from "react-icons/go";
+import { FaCarAlt } from "react-icons/fa";
 
 export default function UserInputWrapper({ setRealTimeData }) {
   const [vehicleType, setVehicleType] = useState({ value: "", key: "" });
@@ -11,8 +13,6 @@ export default function UserInputWrapper({ setRealTimeData }) {
   const [availableStations, setAvailableStations] = useState([]);
   const baseUrl = "http://localhost:8000/api";
   const [timeTableShowing, setTimeTableShowing] = useState(false);
-  const [spinnerActive, setSpinnerActive] = useState(false);
-  const [hasRealTimeData, setHasRealTimeData] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   // let site;
 
@@ -67,23 +67,29 @@ export default function UserInputWrapper({ setRealTimeData }) {
     >
       <form onSubmit={handleSubmit} className="flex items-center space-x-5">
         <div className="flex flex-col">
-          <label className="hidden">Avgångar</label>
-          <input
-            onChange={handleLocationChange}
-            type="text"
-            className={`w-64 h-10 px-2 bg-slate-600 text-slate-200 placeholder:text-slate-200 ${
-              showSiteList ? "rounded-t" : "rounded"
-            }`}
-            placeholder="Resa från..."
-          />
+          <div className="flex items-center">
+            <label className="hidden">Avgångar</label>
+            <GoLocation className="mr-2 text-cyan-400 text-xl" />
+            <input
+              onChange={handleLocationChange}
+              type="text"
+              className={`w-64 h-10 px-2 bg-slate-600 text-slate-200 placeholder:text-slate-200 ${
+                showSiteList ? "rounded-t" : "rounded"
+              }`}
+              placeholder="Resa från..."
+            />
+          </div>
         </div>
         <div className="text-cyan-400 font-bold">med</div>
         <div className="flex flex-col">
-          <label className="hidden">Vehicle type</label>
-          <VehicleDropdown
-            vehicleType={vehicleType}
-            setVehicleType={setVehicleType}
-          />
+          <div className="flex items-center">
+            <label className="hidden">Vehicle type</label>
+            <FaCarAlt className="mr-2 text-cyan-400 text-xl" />
+            <VehicleDropdown
+              vehicleType={vehicleType}
+              setVehicleType={setVehicleType}
+            />
+          </div>
         </div>
         <Button
           type="submit"
@@ -93,7 +99,7 @@ export default function UserInputWrapper({ setRealTimeData }) {
           isLoading={isLoading}
         />
       </form>
-      <div className="absolute w-64 bg-slate-800">
+      <div className="absolute w-64 bg-slate-800 left-12 top-16">
         {showSiteList &&
           availableStations.map((station, index) => {
             return (
